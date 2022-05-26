@@ -156,3 +156,7 @@ Questi file vengono detti partials e si distinguono nel nome per il
 simbolo _ (underscore) all'inizio del nome del file.
 
 ```@import 'path';```
+
+## Ternario per active nel nav
+
+```class="{{ Request::route()->getName() = 'home' ? 'active' : '' }}"```

@@ -99,10 +99,6 @@ Facciamo: <br>
 </style>
 ```
 
-## Ternario per active nel nav
-
-```class="{{ Request::route()->getName() = 'home' ? 'active' : '' }}"```
-
 
 
 

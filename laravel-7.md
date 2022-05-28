@@ -121,6 +121,14 @@ Route::get('/', 'PageController@index' )->name('home');
 
 1. aprire il terminale e lanciare il comando: ```php artisan make:model Models/[NomeModello]```
 
+## Migration
+
+1. lanciare da terminale il comando: ```php artisan migrate```
+
+## Seed
+
+1. lanciare da terminale il comando: ```php artisan db:seed --class=nomeSeeder```
+
 # @Include
 
 Se vogliamo includere una porzione separata di html

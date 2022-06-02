@@ -84,6 +84,17 @@ public function run(Faker $faker){
 23. ``` Route::resource('/', 'HolidayController'); ```
 24. ``` php artisan route:list ```
 
+
+## Show
+
+Con questa sintassi nei parametri la show trova direttamente l'id senza poi dover scrivere $comic = Comic::findOrFail($id);
+
+```
+public function show(Comic $comic)
+{
+    return view('comics.partials.comic', compact('comic'));
+}
+```
 ## Comandi git terminale
 
 ``` git checkout . ``` <br>

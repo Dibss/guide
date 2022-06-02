@@ -118,7 +118,7 @@ Mettiamo i dati inseriti dall'utente($request) in una variabile $data, filliamo 
       $new_comic->fill($data);
       $new_comic->save();
 
-      return redirect()->route('comics.index', $new_comic);
+      return redirect()->route('comics.show', $new_comic);
   }
 ```
 

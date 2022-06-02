@@ -85,7 +85,7 @@ public function run(Faker $faker){
 24. ``` php artisan route:list ```
 
 
-## Show
+## Sintassi Show
 
 Con questa sintassi nei parametri la show trova direttamente l'id senza poi dover scrivere $comic = Comic::findOrFail($id);
 
@@ -95,6 +95,33 @@ public function show(Comic $comic)
     return view('comics.partials.comic', compact('comic'));
 }
 ```
+
+## Sintassi Create
+
+```
+public function create()
+  {
+      return view('comics.create');
+  }
+```
+
+## Sintassi Store
+
+Mettiamo i dati inseriti dall'utente($request) in una variabile $data, filliamo una nuova row con i $data, la salviamo e poi reindirizziamo alla pagina precedente
+
+```
+  public function store(Request $request)
+  {
+      $data = $request->all();
+
+      $new_comic = new Comic();
+      $new_comic->fill($data);
+      $new_comic->save();
+
+      return redirect()->route('comics.index', $new_comic);
+  }
+```
+
 ## Comandi git terminale
 
 ``` git checkout . ``` <br>

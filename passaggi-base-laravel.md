@@ -15,6 +15,26 @@
 13. ```php artisan make:seeder HolidayTableSeeder```
 14. Add to HolidayTableSeeder -> use App\Models\Holiday
 
+### Per fillare da un db php in config il database su mamp:
+1. 
+```
+public function run()
+  {
+
+    $comics = config('comics');
+    foreach($comics as $comic){
+        $new_comic = new Comic();
+
+        $new_comic->fill($comic);
+        $new_comic->save();
+    }
+
+  }
+```
+
+2. se non funziona aggiungere in Models\nomeDelFile:
+``` protected $fillable = ['nomeColonna', 'e tutti gli altri nomi delle colonne separati']; ```
+
 ### Faker (solo se si vogliono usare dati falsi)
 1. ```composer remove fzaninotto/faker```
 2. ```php artisan migrate``` -> remove from require dev? yes

@@ -129,6 +129,15 @@ Mettiamo i dati inseriti dall'utente($request) in una variabile $data, filliamo 
   }
 ```
 
+## Sintassi Edit
+
+```
+public function edit(Comic $comic)
+{
+        return view('comics.edit', compact('comic'));
+}
+```
+
 ## Comandi git terminale
 
 ``` git checkout . ``` <br>
@@ -136,6 +145,114 @@ Mettiamo i dati inseriti dall'utente($request) in una variabile $data, filliamo 
 ``` git sreset --hard ``` <br>
 ``` git clean -f -d ``` <br>
 ``` git pull ``` <br>
+
+
+## Esempio form edit
+
+```
+  <div>
+    <h2>Modifica il fumetto</h2>
+  </div>
+
+  @if ( $errors->any() )
+    <div>
+      <ul>
+        @foreach ( $errors->all() as $error )
+          <li>{{ $error }}</li>
+      </ul>
+    </div>
+  @endif
+
+  <form action="{{ route('comics.update', comic->id) }}" method="post">
+
+    @method('PUT')
+
+    @csrf
+
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="title" required>
+      <!-- <div class="form-text">
+      </div> -->
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <input type="text" name="description" id="description" required>
+    </div>
+    <div>
+      <label for="image">Image (url link):</label>
+      <input type="text" name="image" id="image">
+    </div>
+    <div>
+      <label for="price">Price:</label>
+      <input type="number" name="price" id="price" required>
+    </div>
+    <div>
+      <label for="series">Series:</label>
+      <input type="text" name="series" id="series" required>
+    </div>
+    <div>
+      <label for="sale_date">Sale date:</label>
+      <input type="date" name="sale_date" id="sale_date" required>
+    </div>
+    <div>
+      <button type="submit">Aggiungi</button>
+    </div>
+  </form>
+```
+
+## Esempio form create
+
+```
+  <div>
+    <h2>Aggiungi un fumetto</h2>
+  </div>
+
+  @if ( $errors->any() )
+    <div>
+      <ul>
+        @foreach ( $errors->all() as $error )
+          <li>{{ $error }}</li>
+      </ul>
+    </div>
+  @endif
+
+  <form action="{{ route('comics.store') }}" method="post">
+  
+    @csrf
+
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="title" required>
+      <!-- <div class="form-text">
+      </div> -->
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <input type="text" name="description" id="description" required>
+    </div>
+    <div>
+      <label for="image">Image (url link):</label>
+      <input type="text" name="image" id="image">
+    </div>
+    <div>
+      <label for="price">Price:</label>
+      <input type="number" name="price" id="price" required>
+    </div>
+    <div>
+      <label for="series">Series:</label>
+      <input type="text" name="series" id="series" required>
+    </div>
+    <div>
+      <label for="sale_date">Sale date:</label>
+      <input type="date" name="sale_date" id="sale_date" required>
+    </div>
+    <div>
+      <button type="submit">Aggiungi</button>
+    </div>
+  </form>
+```
+
 
 
 

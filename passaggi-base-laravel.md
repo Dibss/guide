@@ -118,6 +118,15 @@ Da mettere tra gli attributi degli input
 value="{{ old('title') }}"
 ```
 
+### Se riguarda una select:
+```
+<div>
+  <select name='esempio0' required>
+    <option @if(old('esempio0'))>esempio2</option>
+    <option @if(old('esempio0'))>esempio3</option>
+  </select>
+</div>
+```
 
 ## Sintassi Store
 

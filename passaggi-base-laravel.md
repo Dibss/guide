@@ -191,6 +191,41 @@ public function destroy(Comic $comic)
 </form>
 ```
 
+### Esempio file deleteMessage confermare la cancellazione:
+
+```
+const deleteForms = document.querySelectorAll('.delete-form');
+
+deleteForms.forEach(element => {
+  
+  const title = element.getAttribute('data-title')
+
+  element.addEventListener('submit', (e)=>{
+    // prevent default previene il refresh della pagina
+    e.preventDefault();
+    const accept = confirm(`Sei sicuro di voler eliminare: ${title}?`);
+    if(accept) e.target.submit();
+  })
+
+});
+```
+
+# Se si vuole creare un nuovo file js in resources/js:
+1. creare il file nella cartella
+2. in webpack.mix.js aggiungere la riga per il nuovo file: 
+```
+mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/nuovoFile.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css');
+```
+3. lanciare di nuovo ```npm run dev``` e ```npm run watch```
+4. inserire nella pagina:
+```
+section('delete-message')
+  <script src="{{ assset('js/deleteMessage,js') }}"></script>
+@endsection
+```
+
 ## Comandi git terminale
 
 ``` git checkout . ``` <br>

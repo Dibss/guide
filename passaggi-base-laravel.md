@@ -163,7 +163,7 @@ public function edit(Comic $comic)
     </div>
   @endif
 
-  <form action="{{ route('comics.update', comic->id) }}" method="post">
+  <form action="{{ route('comics.update', $comic->id) }}" method="post">
 
     @method('PUT')
 

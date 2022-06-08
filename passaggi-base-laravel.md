@@ -155,7 +155,7 @@ public function update(Request $request, Comic $comic)
     $comic->fill($data);
     $comic->save();
 
-    return redirect()->route('comics.show', $comic);
+    return redirect()->route('comics.show', $comic)->with('message', "Hai aggiornato con successo: $comic->title");;
 }
 ```
 
@@ -166,8 +166,19 @@ public function destroy(Comic $comic)
 {
     $comic->delete();
 
-    return redirect()->route('comics.index');
+    return redirect()->route('comics.index')->with('message', "Hai eliminato con successo: $comic->title");
 }
+```
+
+### Messaggio nell'index.blade.php per l'elemento eliminato o modificato
+
+```
+<!-- messaggio di eliminazione o modifica scritto nella funzione destroy/update del controller -->
+  @if(session('message'))
+    <div>
+      {{ session('message') }}
+    </div>
+  @endif
 ```
 
 ### Delete button in index.blade.php

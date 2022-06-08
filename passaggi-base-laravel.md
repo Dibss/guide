@@ -159,6 +159,27 @@ public function update(Request $request, Comic $comic)
 }
 ```
 
+## Sintassi delete
+
+```
+public function destroy(Comic $comic)
+{
+    $comic->delete();
+
+    return redirect()->route('comics.index');
+}
+```
+
+### Delete button in index.blade.php
+
+```
+<form action="{{ route( 'comics.destroy', $item->id) }}" method="post">
+  @method('DELETE')
+  @csrf
+  <button type="submit">Delete</button>
+</form>
+```
+
 ## Comandi git terminale
 
 ``` git checkout . ``` <br>

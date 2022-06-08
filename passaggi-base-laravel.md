@@ -134,7 +134,21 @@ Mettiamo i dati inseriti dall'utente($request) in una variabile $data, filliamo 
 ```
 public function edit(Comic $comic)
 {
-        return view('comics.edit', compact('comic'));
+    return view('comics.edit', compact('comic'));
+}
+```
+
+## Sintassi update
+
+```
+public function update(Request $request, Comic $comic)
+{
+    $data = $request->all();
+
+    $new_comic->fill($data);
+    $new_comic->save();
+
+    return redirect()->route('comics.show', $new_comic);
 }
 ```
 

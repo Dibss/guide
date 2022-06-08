@@ -96,6 +96,13 @@ public function show(Comic $comic)
 }
 ```
 
+
+### Per inserire l'informazione nella show.blade.php (e non solo) senza tag html
+
+```
+{{!! $comic->title !!}}
+```
+
 ## Sintassi Create
 
 ```
@@ -159,7 +166,6 @@ public function update(Request $request, Comic $comic)
 ``` git sreset --hard ``` <br>
 ``` git clean -f -d ``` <br>
 ``` git pull ``` <br>
-
 
 ## Esempio form edit
 

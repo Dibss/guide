@@ -112,6 +112,13 @@ public function create()
   }
 ```
 
+### Per non dover riscrivere tutti i dati nel form se non va a buon fine la creazione dell'elemento:
+Da mettere tra gli attributi degli input
+```
+value="{{ old('title') }}"
+```
+
+
 ## Sintassi Store
 
 Mettiamo i dati inseriti dall'utente($request) in una variabile $data, filliamo una nuova row con i $data, la salviamo e poi reindirizziamo alla pagina precedente

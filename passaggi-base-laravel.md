@@ -112,6 +112,13 @@ Mettiamo i dati inseriti dall'utente($request) in una variabile $data, filliamo 
 ```
   public function store(Request $request)
   {
+  
+      $request->validate(
+            [
+                "name"=>"required",
+            ]
+      );
+  
       $data = $request->all();
 
       $new_comic = new Comic();

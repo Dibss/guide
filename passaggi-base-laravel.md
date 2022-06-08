@@ -145,10 +145,10 @@ public function update(Request $request, Comic $comic)
 {
     $data = $request->all();
 
-    $new_comic->fill($data);
-    $new_comic->save();
+    $comic->fill($data);
+    $comic->save();
 
-    return redirect()->route('comics.show', $new_comic);
+    return redirect()->route('comics.show', $comic);
 }
 ```
 

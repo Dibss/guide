@@ -212,6 +212,12 @@ public function edit(Comic $comic)
 </div>
 ```
 
+### Se c'è una textarea:
+```
+<textarea name="" id="" cols="30" rows="10">
+  {{ $comic->description }}
+</textarea>
+```
 
 ## Esempio form create
 

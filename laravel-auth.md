@@ -90,7 +90,6 @@ mix.js('resources/js/app.js', 'public/js')
 ```php
 use Illuminate\Support\Facades\Route;
 
-
 Auth::routes();
 
 //localhost:8000/admin
@@ -139,7 +138,7 @@ export default{
 
 </style>
 ```
-32. in App.vue:
+32. in App.vue, sintassi:
 ```vue
 <template>
   <div>

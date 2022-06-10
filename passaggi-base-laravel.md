@@ -40,8 +40,6 @@ slug rende tutto minuscolo e-con-i-trattini-al-posto-degli-spazi
 ``` php artisan optimize ``` <br>
 
 18. ``` php artisan make:controller HolidayController --resource ```
-19. in HolidayController index() -> ``` $holiday = Holiday::all(); ```
-20. ``` return view('index', compact('holiday')); ```
 21. Nella view:
 ```php
 @foreach ($holiday as $key => $item)
@@ -54,6 +52,12 @@ slug rende tutto minuscolo e-con-i-trattini-al-posto-degli-spazi
 22. form.blade.php (?)
 23. ``` Route::resource('/', 'HolidayController'); ```
 24. ``` php artisan route:list ```
+25. in HolidayController aggiungere ```use App\Models\Holiday;```
+26. nella cartella admin creare una cartella holidays e in holidays index.blade.php, show.blade.php etc. in base alle crud
+27. es -> in index.blade.php usare @section('content') facendo riferimento allo yield in app.blade.php
+28. per collegare le pagine usare il lato sinistro del menu che risulterà vuoto con per esempio:
+```<li><a href="{{ route('admin.posts.index') }}">Posts</a></li>```
+29. esempio button per vedere il prodotto singolo -> ```<button><a href="{{ route('admin.posts.show', $post->id) }}">View</a></button>```
 ### String slug
 1. use Illuminate\Support\Str;
 2. 
@@ -61,6 +65,28 @@ slug rende tutto minuscolo e-con-i-trattini-al-posto-degli-spazi
 $post->slug = $slug = Str::slug($post->title, '-');
 ```
 per rendere il titolo minuscolo con i trattini
+### Per fillare con il seeder senza faker, e anche per creare un user base che non si cancella per fare i test (NON SI FA, E' SOLO PER I TEST)
+```php
+use Illuminate\Database\Seeder;
+use App\User;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $user = new User();
+        $user->name = 'Pippo';
+        $user->email = 'test@test.it';
+        $user->password = bcrypt('password');
+        $user->save();
+    }
+}
+```
 ### Per fillare da un db php in config il database su mamp:
 1. 
 ```
@@ -100,6 +126,19 @@ public function run(Faker $faker){
 
   }
 
+}
+```
+
+## Sintassi index
+1. in HolidayController index() -> ``` $holiday = Holiday::all(); ```
+2. ``` return view('index', compact('holiday')); ```
+3. 
+```php
+public function index()
+{
+    $post = Post::all();
+
+    return view('index', compact('post'));
 }
 ```
 ## Sintassi Show
@@ -166,6 +205,28 @@ Mettiamo i dati inseriti dall'utente($request) in una variabile $data, filliamo 
       return redirect()->route('comics.show', $new_comic);
   }
 ```
+
+### Se abbiamo bypassato nella create un dato che avevamo messo obbligatorio dobbiamo 'ridichiararlo' nella store tipo: (in questo caso lo slug)
+```php
+$request->validate(
+    [
+        "title"=>"required",
+        "description"=>"required",
+        "image"=>"required",
+    ]
+);
+
+$data = $request->all();
+
+$new_post = new Post();
+$new_post->fill($data);
+$post->slug = Str::slug($post->title, '-');
+$new_post->save();
+
+return redirect()->route('admin.posts.show', $new_post);
+```
+in questo caso aggiungere al controller anche ```use Illuminate\Support\Str;``
+
 ## Sintassi Edit
 
 ```
@@ -219,7 +280,7 @@ public function destroy(Comic $comic)
 </form>
 ```
 
-### Esempio file deleteMessage confermare la cancellazione:
+### Esempio file deleteMessage confermare la cancellazione: (consigliato fare uno @yield('scripts') in fondo alla pagina app.blade.php nella cartella layout)
 
 ```
 const deleteForms = document.querySelectorAll('.delete-form');
@@ -249,7 +310,7 @@ mix.js('resources/js/app.js', 'public/js')
 4. inserire nella pagina:
 ```
 section('delete-message')
-  <script src="{{ assset('js/deleteMessage,js') }}"></script>
+  <script src="{{ assset('js/nuovoFile.js') }}"></script>
 @endsection
 ```
 
@@ -311,7 +372,7 @@ section('delete-message')
       <input type="date" name="sale_date" value="{{ old('sale_date', $comic->sale_date) }}" id="sale_date" required>
     </div>
     <div>
-      <button type="submit">Aggiungi</button>
+      <button type="submit">Aggiorna</button>
     </div>
   </form>
 ```
@@ -345,6 +406,7 @@ section('delete-message')
       <ul>
         @foreach ( $errors->all() as $error )
           <li>{{ $error }}</li>
+        @endforeach
       </ul>
     </div>
   @endif

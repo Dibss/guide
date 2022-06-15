@@ -14,7 +14,7 @@
   3. da name->home a name->admin.home
 9. nell'HomeController nella funzione index() cambiare da home a admin.home
 10. in app/providers/RouteSeerviceProvider cambiare in cost HOME da /home a /admin
-11. ```php artisan make:controller Admin/HomeController```
+11. ```php artisan make:controller Admin/HomeController```no
 12. tagliare la funzione index() dall'HomeController e spostarla nell'HomeController della cartella admin
 13. in web.php cambiare la route dell'HomeController:
 ```php

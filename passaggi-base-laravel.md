@@ -33,12 +33,7 @@ slug rende tutto minuscolo e-con-i-trattini-al-posto-degli-spazi
 16. Se non funziona, in MOdels\Holiday -> ```protected $table = 'holiday';```
 
 17. Se continua a non funzionare:
-``` php artisan route:cache ``` <br>
-``` php artisan route:clear ``` <br>
-``` php artisan config:cache ``` <br>
-``` php artisan config:clear ``` <br>
-``` php artisan optimize ``` <br>
-
+``` php artisan route:cache && php artisan route:clear && php artisan config:cache && php artisan config:clear && php artisan optimize```
 18. ``` php artisan make:controller HolidayController --resource ```
 21. Nella view:
 ```php
@@ -58,6 +53,16 @@ slug rende tutto minuscolo e-con-i-trattini-al-posto-degli-spazi
 28. per collegare le pagine usare il lato sinistro del menu che risulterà vuoto con per esempio:
 ```<li><a href="{{ route('admin.posts.index') }}">Posts</a></li>```
 29. esempio button per vedere il prodotto singolo -> ```<button><a href="{{ route('admin.posts.show', $post->id) }}">View</a></button>```
+30. per le pagine a piè di pagina:
+```php
+@if($posts->hasPages())
+  {{ $posts->links() }}
+@endif
+```
+^^^ questo va messo alla fine dell'index subito prima della chiusura dell'ultimo div
+```$posts = Post::orderBy('updated_at', 'DESC')->paginate(5);```
+^^^ questo sta nell'index() crud
+
 ### String slug
 1. use Illuminate\Support\Str;
 2. 
@@ -361,11 +366,11 @@ section('delete-message')
     </div>
     <div>
       <label for="price">Price:</label>
-      <input type="number" name="price" value="{{ old('price', $comic->pric)e }}" id="price" required>
+      <input type="number" name="price" value="{{ old('price', $comic->price) }}" id="price" required>
     </div>
     <div>
       <label for="series">Series:</label>
-      <input type="text" name="series" value="{{ old('series', $comic->serie)s }}" id="series" required>
+      <input type="text" name="series" value="{{ old('series', $comic->series) }}" id="series" required>
     </div>
     <div>
       <label for="sale_date">Sale date:</label>

@@ -1,6 +1,7 @@
 ### con -mrcs crea in automatico migration, resource controller e seeder:
 es.
 ```php artisan make:model Models/Category -mrcs```
+meglio non mettere la c e fare il controller a parte.
 
 1. per prima cosa si fa la migration con le colonne della nuova table da collegare
 ```php
